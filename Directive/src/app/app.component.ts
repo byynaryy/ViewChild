@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ChildDirective } from './child.directive';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Directive';
+  extraChild!: string;
+  
+  @ViewChild(ChildDirective) 
+  set appChild(directive: ChildDirective) {
+    this.extraChild = directive.child
+  };
+
+  ngAfterViewInit() {
+    console.log(this.extraChild );
+  }
+
 }
